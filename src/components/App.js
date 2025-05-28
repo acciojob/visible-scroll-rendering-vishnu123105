@@ -58,7 +58,7 @@ const Item = ({ index }) => (
     }}
   >
     <h2>Item {index}</h2>
-    <p>Lorem ipsum dolor sit amet</p>
+    <p>Lorem ipsum dolor sit amet.</p>
   </div>
 
 );
