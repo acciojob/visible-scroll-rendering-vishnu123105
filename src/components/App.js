@@ -1,12 +1,12 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./../styles/App.css";
 
-const ITEM_HEIGHT = 100; // height in px for each item
+const ITEM_HEIGHT = 100; 
 const VISIBLE_COUNT = 10;
 
 const App = () => {
   const containerRef = useRef(null);
-  const allItems = useRef(Array.from({ length: 100 }, (_, i) => i)); // 100 items
+  const allItems = useRef(Array.from({ length: 100 }, (_, i) => i));
   const [scrollTop, setScrollTop] = useState(0);
 
   const handleScroll = () => {
@@ -61,6 +61,7 @@ const Item = ({ index }) => (
     <h2>Item {index}</h2>
     <p>Lorem ipsum dolor sit amet</p>
   </div>
+  
 );
 
 export default App;
