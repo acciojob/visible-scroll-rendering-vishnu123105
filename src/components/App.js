@@ -13,8 +13,8 @@ const App = () => {
     if (containerRef.current) {
       setScrollTop(containerRef.current.scrollTop);
     }
-  };
-
+  }
+  
   useEffect(() => {
     const container = containerRef.current;
     if (container) {
@@ -61,7 +61,7 @@ const Item = ({ index }) => (
     <h2>Item {index}</h2>
     <p>Lorem ipsum dolor sit amet</p>
   </div>
-  
+
 );
 
 export default App;
