@@ -1,19 +1,17 @@
 import React, { useRef, useState, useEffect } from "react";
-import './../styles/App.css';
+import "./../styles/App.css";
 
-const ITEM_HEIGHT = 100; 
-const CONTAINER_HEIGHT = 500;
+const ITEM_HEIGHT = 100; // height in px for each item
+const VISIBLE_COUNT = 10;
 
 const App = () => {
   const containerRef = useRef(null);
-  const itemsRef = useRef(Array.from({ length: 15 }, (_, i) => i));
-  const [visibleStart, setVisibleStart] = useState(0);
+  const allItems = useRef(Array.from({ length: 100 }, (_, i) => i)); // 100 items
+  const [scrollTop, setScrollTop] = useState(0);
 
   const handleScroll = () => {
     if (containerRef.current) {
-      const scrollTop = containerRef.current.scrollTop;
-      const start = Math.floor(scrollTop / ITEM_HEIGHT);
-      setVisibleStart(start);
+      setScrollTop(containerRef.current.scrollTop);
     }
   };
 
@@ -25,28 +23,24 @@ const App = () => {
     }
   }, []);
 
-  const visibleCount = Math.ceil(CONTAINER_HEIGHT / ITEM_HEIGHT);
-  const visibleItems = itemsRef.current.slice(visibleStart, visibleStart + visibleCount + 1);
+  const startIndex = Math.floor(scrollTop / ITEM_HEIGHT);
+  const visibleItems = allItems.current.slice(startIndex, startIndex + VISIBLE_COUNT);
 
   return (
     <div
       ref={containerRef}
-      style={{
-        height: `${CONTAINER_HEIGHT}px`,
-        overflowY: "auto",
-        border: "1px solid #ccc"
-      }}
+      style={{ height: "500px", overflow: "auto", border: "1px solid #ccc" }}
     >
-      <div style={{ height: `${itemsRef.current.length * ITEM_HEIGHT}px`, position: "relative" }}>
+      <div style={{ height: `${allItems.current.length * ITEM_HEIGHT}px`, position: "relative" }}>
         <div
           style={{
             position: "absolute",
-            top: `${visibleStart * ITEM_HEIGHT}px`,
-            width: "100%"
+            top: `${startIndex * ITEM_HEIGHT}px`,
+            width: "100%",
           }}
         >
-          {visibleItems.map((i) => (
-            <Item n={i} key={i} />
+          {visibleItems.map((item) => (
+            <Item key={item} index={item} />
           ))}
         </div>
       </div>
@@ -54,9 +48,17 @@ const App = () => {
   );
 };
 
-const Item = ({ n }) => (
-  <div style={{ height: `${ITEM_HEIGHT}px`, padding: '10px', boxSizing: 'border-box' }}>
-    <h1>Item {n}</h1>
+const Item = ({ index }) => (
+  <div
+    style={{
+      height: `${ITEM_HEIGHT}px`,
+      padding: "10px",
+      borderBottom: "1px solid #ddd",
+      boxSizing: "border-box",
+      background: index % 2 === 0 ? "#f9f9f9" : "#fff",
+    }}
+  >
+    <h2>Item {index}</h2>
     <p>Lorem ipsum dolor sit amet</p>
   </div>
 );
