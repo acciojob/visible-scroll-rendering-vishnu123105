@@ -29,7 +29,7 @@ const App = () => {
   return (
     <div
       ref={containerRef}
-      style={{ height: "500px", overflow: "auto", border: "1px solid #ccc" }}
+      style={{ height: "500px", overflow: "auto" }}
     >
       <div style={{ height: `${allItems.current.length * ITEM_HEIGHT}px`, position: "relative" }}>
         <div
@@ -53,7 +53,6 @@ const Item = ({ index }) => (
     style={{
       height: `${ITEM_HEIGHT}px`,
       padding: "10px",
-      borderBottom: "1px solid #ddd",
       boxSizing: "border-box",
       background: index % 2 === 0 ? "#f9f9f9" : "#fff",
     }}
